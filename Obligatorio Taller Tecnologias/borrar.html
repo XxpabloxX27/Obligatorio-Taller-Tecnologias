@@ -1,0 +1,54 @@
+<html>
+<head>
+  <title>Administrar Ubicaciones</title>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="CSSborrar/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF3HhfN9p42Ol2BCDFLiqKkDKxvW4HpV4"></script>
+    <script src="JSborrar/program.js" type="text/javascript"></script>
+</head>
+<body>
+  <nav class="navbar navbar-inverse">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">PuntaMaps</a>
+      </div>
+      <ul class="nav navbar-nav">
+        <li><a href="home.html">Home</a></li>
+        <li class="active"><a href="index.html">Agregar</a></li>
+        <!--<li><a href="aprobarAdmin.html">Aprobar</a></li>-->
+      </ul>
+      <form class="navbar-form navbar-left" action="/action_page.php">
+        <div class="form-group">
+          <input type="text" class="form-control" placeholder="Buscar" name="search">
+        </div>
+        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
+      </form>
+    </div>
+  </nav>
+
+
+
+<div id="map"></div>
+  <div class="container">
+
+    <table class="table table-hover table-dark">
+      <thead>
+        <tr>
+          <th>Nombre</th>
+          <th>Descripcion</th>
+          <th>Tipo</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody id="tblBody">
+
+      </tbody>
+    </table>
+  </div>
+
+</body>
+</html>
