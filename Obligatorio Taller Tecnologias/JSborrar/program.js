@@ -52,6 +52,7 @@ function getUbicaciones()
      type: "GET",
      url: "http://localhost:8060/api/ubicacion",
      success: function(data){
+       
        marker = null;
         var ubicaciones = data.ubicaciones;
 

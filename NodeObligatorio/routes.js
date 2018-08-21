@@ -9,6 +9,6 @@ api.get("/ubicacion", ctrUbicacion.getUbicaciones);/*
 api.get("/persona/:idPersona", ctrPersona.getPersona);
 api.post("/persona",ctrPersona.addPersona);
 api.put("/persona/:idPersona", ctrPersona.updatePersona);*/
-api.delete("/ubicacion/:idPersona",ctrPersona.deletePersona);
+//api.delete("/ubicacion/:idPersona",ctrPersona.deletePersona);
 
 module.exports = api;
