@@ -52,7 +52,7 @@ function getUbicaciones()
      type: "GET",
      url: "http://localhost:8060/api/ubicacion",
      success: function(data){
-       
+
        marker = null;
         var ubicaciones = data.ubicaciones;
 
@@ -61,13 +61,13 @@ function getUbicaciones()
         for(var i = 0; i<ubicaciones.length; i++)
         {
 
-          tblBody.innerHTML+=
-          '<tr onclick = "CenterMap('+ ubicaciones[i].latitud +','+ubicaciones[i].longitud+')">'+
-          '<td>'+ ubicaciones[i].nombre +'</td>'+
-          '<td>'+ ubicaciones[i].descripcion +'</td>'+
-          '<td>'+ ubicaciones[i].tipo +'</td>'+
-          '<td><button type="button" class="btn btn-default btn-lg" onclick = "EditarUbicacion('+ ubicaciones[i].latitud +','+ubicaciones[i].longitud+','+ubicaciones[i]._id+')" ><span class="glyphicon glyphicon-pencil"></span></button>'+
-          '<button type="button" class="btn btn-default btn-lg" onclick = "EditarUbicacion('+ ubicaciones[i].latitud +','+ubicaciones[i].longitud+','+ubicaciones[i]._id+')"><span class="glyphicon glyphicon-remove"></span></button></td></tr>'
+          $("#tblBody").append('<tr onclick = "CenterMap("'+ ubicaciones[i].latitud +'","'+ubicaciones[i].longitud+'")><td>'+ ubicaciones[i].nombre +'</td><td>'+ ubicaciones[i].descripcion +'</td><td>'+ ubicaciones[i].tipo +'</td><td><button type="button" class="btn btn-default btn-lg" onclick = EditarUbicacion("'+ubicaciones[i]._id+'","'+ubicaciones[i].latitud+'","'+ubicaciones[i].longitud'")><span class="glyphicon glyphicon-pencil"></span></button>
+<button type="button" class="btn btn-default btn-lg" onclick = "BorrarUbicacion("'+ubicaciones[i]._id+'","'+ubicaciones[i].latitud+'","'+ubicaciones[i].longitud+'")"'><span class="glyphicon glyphicon-remove"></span></button></td></tr>');
+
+
+
+
+
           var marcador = new google.maps.Marker({
             position :{
               lat: parseFloat(ubicaciones[i].latitud),
@@ -97,7 +97,21 @@ function getUbicaciones()
 }
 
 
-function BorrarUbicacion(){}
+function BorrarUbicacion(latitud,longitud,idubic){
+  var id = {idubic:idubic}
+  $.ajax({
+  type:"DELETE",
+  data:JSON.stringify(idubic),
+  contentType:'application/json',
+  url:"http://localhost:2018/api/wsDeleteUbicacion",
+  success:function(data){
+    alert("todo bien");
+  },
+  error:function(data){
+alert("todo mal");
+  }
+})
+}
 
 
 function bindInfoWindow(marker, map, infowindow, html) {
