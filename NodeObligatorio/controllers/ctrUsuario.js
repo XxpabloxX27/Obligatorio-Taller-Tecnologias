@@ -1,7 +1,7 @@
-const ubicaciones = require("../models/Usuario");
+const usuarios = require("../models/Usuario");
 function postUsuario(req,res){
   console.log(req.body);
-  var ubicacion = new ubicaciones();
+  var usuario = new usuarios();
   usuario.nombre = req.body.nombre;
   usuario.apellido = req.body.apelldio;
   usuario.mail = req.body.mail;

@@ -15,5 +15,6 @@ api.put("/wsUpdateUbicacion",ctrUbicacion.updateUbicacion);
 api.post("/wsAgregarUsuario",ctrUsuario.postUsuario);
 api.get("/wsUsuarios",ctrUsuario.getUsuarios);
 api.delete("/wsDeleteUsuario",ctrUsuario.deleteUsuario);
+api.get("/wsUbicacion",ctrUbicacion.getUbicacion);
 
 module.exports = api;

@@ -14,11 +14,7 @@ function initMap() {
     center: {lat:-34.960159, lng:-54.942453},
     zoom: 14
   });
-  google.maps.event.addListener(map, 'click', function(event) {
 
-      mouseLocation = event.latLng;
-      placeMarker(mouseLocation,map);
-});
 return map;
 }
 
@@ -58,31 +54,33 @@ function getUbicaciones()
         tblBody.innerHTML = "";
         for(var i = 0; i<ubicaciones.length; i++)
         {
+          if(ubicaciones[i].aprobado ==true)
+          {
+            tblBody.innerHTML += "<tr class='yeaboi' id="+i+" hidden><td>"+ubicaciones[i].nombre+"</td><td>"+ubicaciones[i].descripcion+"</td><td>"+ubicaciones[i].tipo+"</td><td>"+ubicaciones[i].latitud+"</td><td>"+ubicaciones[i].longitud+"</td><td><input type='button' value='ActualizameAmeo' onclick='ActualizarUbicacion(\""+ubicaciones[i]._id+"\")'/><input type='button'value='BorramePerro' onclick='BorrarUbicacion(\""+ubicaciones[i]._id+"\")'></input></td></tr>";
 
-          tblBody.innerHTML += "<tr class='yeaboi' id="+i+" hidden><td>"+ubicaciones[i].nombre+"</td><td>"+ubicaciones[i].descripcion+"</td><td>"+ubicaciones[i].tipo+"</td><td>"+ubicaciones[i].latitud+"</td><td>"+ubicaciones[i].longitud+"</td><td><input type='button' value='ActualizameAmeo' onclick='ActualizarUbicacion(\""+ubicaciones[i]._id+"\")'/><input type='button'value='BorramePerro' onclick='BorrarUbicacion(\""+ubicaciones[i]._id+"\")'></input></td></tr>";
 
 
+            var marcador = new google.maps.Marker({
+              position :{
+                lat: parseFloat(ubicaciones[i].latitud),
+                lng: parseFloat(ubicaciones[i].longitud)
+              },
+              map : map,
+              draggable:true,
+              ubicacion : ubicaciones[i],
+              lugar : i,
+              contenido : '<div id="content">'+
+              '<div id="siteNotice">'+
+              '</div>'+
+              '<h1 id="firstHeading" class="firstHeading">'+ubicaciones[i].nombre+'</h1>'+
+              '<div id="bodyContent">'+
+              '<p>'+ ubicaciones[i].descripcion +'</p>'+
+              '</div>'+
+              '</div>'
+            });
+            ActualizarPosicion(marcador);
 
-          var marcador = new google.maps.Marker({
-            position :{
-              lat: parseFloat(ubicaciones[i].latitud),
-              lng: parseFloat(ubicaciones[i].longitud)
-            },
-            map : map,
-            draggable:true,
-            ubicacion : ubicaciones[i],
-            lugar : i,
-            contenido : '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">'+ubicaciones[i].nombre+'</h1>'+
-            '<div id="bodyContent">'+
-            '<p>'+ ubicaciones[i].descripcion +'</p>'+
-            '</div>'+
-            '</div>'
-          });
-          ActualizarPosicion(marcador);
-          bindInfoWindow(marcador,map,infoWindow,marcador.contenido);
+          }
         }
 
 
@@ -142,13 +140,6 @@ initMap();
 }
 
 
-function bindInfoWindow(marker, map, infowindow, html) {
-    marker.addListener('click', function() {
-        infowindow.setContent(html);
-        infowindow.open(map, this);
-    });
-}
-
 function CenterMap(lat,lon){
   map.setCenter({
     lat : lat,
@@ -167,4 +158,12 @@ function ActualizarPosicion(marker){
     $('#txtLat').val(lat);
     $('#txtLon').val(lon);
 });
+  google.maps.event.addListener(marker,'click',function(){
+    $(".yeaboi").hide();
+    $("#"+this.lugar).show();
+    var lat = marker.getPosition().lat();
+    var lon = marker.getPosition().lng();
+    $('#txtLat').val(lat);
+    $('#txtLon').val(lon);
+  })
 }

@@ -27,6 +27,20 @@ function getUbicaciones(req,res)
   })
 }
 
+function getUbicacion(req,res)
+{
+  let id = req.body.id;
+  ubicaciones.findById(id,(err,ubicacion) => {
+    if(err) return res.status(500).send({msg:"Error al realziar la petición"});
+    if(!ubicacion) return res.status(404).send({msg:"Ubicacion inexistente"});
+
+    res.status(200).send({ubicacion});
+  })
+}
+
+
+
+
 function deleteUbicacion(req,res){
   let idubic = req.body.idubic;
   console.log(idubic);
@@ -55,5 +69,6 @@ module.exports = {
   PostUbicacion,
   getUbicaciones,
   deleteUbicacion,
-  updateUbicacion
+  updateUbicacion,
+  getUbicacion
 }
