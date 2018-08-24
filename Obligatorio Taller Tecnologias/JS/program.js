@@ -21,6 +21,23 @@ $(document).ready(function(){
             $('#btnAgregar').removeClass('disabled');
             $('#characterLeft').removeClass('red');
         }
+  });
+        $('#characterLeftComentario').text('250 characters left');
+        $('#txtComentario').keydown(function () {
+            var maxC = 250;
+            var lenC = $(this).val().length;
+            if (lenC >= maxC) {
+                $('#characterLeftComentario').text('No hay mas caracteres disponibles');
+                $('#characterLeftComentario').addClass('red');
+                $('#btnAgregar').addClass('disabled');
+            }
+            else {
+                var chC = maxC - lenC;
+                $('#characterLeftComentario').text(chC + ' caracteres disponibles');
+                $('#btnAgregar').removeClass('disabled');
+                $('#characterLeftComentario').removeClass('red');
+            }
+
 
 
     });
@@ -54,16 +71,20 @@ function AgregarUbicacion(){
         }
         var nombre = $("#txtNombre").val();
         var descrip = $("#txtDescripcion").val();
+        var comentario = $("#txtComentario").val();
         var lat = $("#txtLat").val();
         var lon = $("#txtLon").val();
         var aprob = true;
+        var valoracion = $("#sltValorar").val();
         var ubicacion ={
           nombre : nombre,
           descripcion : descrip,
           tipo : tipo,
           latitud : lat,
           longitud : lon,
-          aprobado : aprob
+          aprobado : aprob,
+          valoracion : valoracion,
+          comentario : comentario
         }
 
       $.ajax({
@@ -177,7 +198,7 @@ function getUbicaciones()
             '</div>'+
             '<h1 id="firstHeading" class="firstHeading">'+ubicaciones[i].nombre+'</h1>'+
             '<div id="bodyContent">'+
-            '<p>'+ ubicaciones[i].descripcion +'</p>'+
+            '<p>Descripcion : '+ ubicaciones[i].descripcion +'</p>'+'<p>Valoracion : '+ubicaciones[i].valoracion+' / 5 Estrellas</p>'+'<p>Opiniones : '+ubicaciones[i].comentario+'</p>'+
             '</div>'+
             '</div>'
           });

@@ -54,7 +54,14 @@
           <div class="form-group">
             <select id="slt">
 
-            </select>
+            </select> <label>Tipo</label>
+            <select id="sltValorar">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+              <option value="5">5</option>
+            </select> <label>Valoracion</label>
           </div>
           <div class="form-group">
             <input type="text" class="form-control" id="txtLat" placeholder="Latitud"  readonly>
@@ -62,8 +69,12 @@
           <div class="form-group">
             <input type="text" class="form-control" id="txtLon" placeholder="Longitud" readonly >
           </div>
+          <div class="form-group">
+            <textarea class="form-control" type="textarea" id="txtComentario" placeholder="Comentarios" maxlength="250" rows="7"></textarea>
+            <span class="help-block"><p id="characterLeftComentario" class="help-block ">No hay mas caracteres disponibles</p></span>
+          </div>
           <hr>
-          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarUbicacion()">Agregar Ubicacion</button>
+          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarUbicacion()">Agregar</button>
         </form>
       </div>
     </div>

@@ -8,6 +8,8 @@ function PostUbicacion(req,res){
   ubicacion.latitud = req.body.latitud;
   ubicacion.longitud = req.body.longitud;
   ubicacion.aprobado = req.body.aprobado;
+  ubicacion.valoracion = req.body.valoracion;
+  ubicacion.comentario = req.body.comentario;
   ubicacion.save((err,ubicacionIngresada)=>{
     if(err){
       res.status(500).send({msg:"Error al guardar"});
