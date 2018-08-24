@@ -18,8 +18,8 @@
       </div>
       <ul class="nav navbar-nav">
         <li><a href="home.html">Home</a></li>
-        <li class="active"><a href="index.html">Agregar</a></li>
-        <!--<li><a href="aprobarAdmin.html">Aprobar</a></li>-->
+        <li ><a href="index.html">Agregar</a></li>
+        <li class="active"><a href="borrar.html">Aprobar</a></li>
       </ul>
       <form class="navbar-form navbar-left" action="/action_page.php">
         <div class="form-group">
@@ -31,8 +31,39 @@
   </nav>
 
 
+    <div class="container">
+      <div class="col-md-5">
+        <div class="form-area">
+          <form role="form">
+            <br style="clear:both">
+            <h3 style="margin-bottom: 25px; ">Agregar Ubicacion</h3>
 
-<div id="map"></div>
+
+
+
+            <div class="form-group">
+              <input type="text" class="form-control" id="txtNombre" placeholder="Nombre" required>
+            </div>
+            <div class="form-group">
+              <textarea class="form-control" type="textarea" id="txtDescripcion" placeholder="Descripcion" maxlength="250" rows="7"></textarea>
+              <span class="help-block"><p id="characterLeft" class="help-block ">No hay mas caracteres disponibles</p></span>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="txtTipo" placeholder="Tipo" required>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="txtLat" placeholder="Latitud"  readonly>
+            </div>
+            <div class="form-group">
+              <input type="text" class="form-control" id="txtLon" placeholder="Longitud" readonly >
+            </div>
+            <hr>
+            <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="ActualizarUbicacion()">esrtdhyjguhn</button>
+          </form>
+        </div>
+      </div>
+
+      <div id="map"></div>
   <div class="container">
 
     <table class="table table-hover table-dark">
@@ -41,21 +72,19 @@
           <th>Nombre</th>
           <th>Descripcion</th>
           <th>Tipo</th>
-          <th></th>
+          <th>Lat</th>
+          <th>Lng</th>
+          <th>Botones</th>
         </tr>
       </thead>
       <tbody id="tblBody">
-        <tr>
-          <td>
-            
-
-
-
-
 
       </tbody>
     </table>
   </div>
+
+
+
 
 </body>
 </html>

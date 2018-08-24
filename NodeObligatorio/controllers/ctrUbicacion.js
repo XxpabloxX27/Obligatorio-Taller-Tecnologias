@@ -27,8 +27,9 @@ function getUbicaciones(req,res)
 }
 
 function deleteUbicacion(req,res){
-  let idubic = req.params.idubic;
-  ubicaciones.findById(idbuic,(err,ubicacion) =>{
+  let idubic = req.body.idubic;
+  console.log(idubic);
+  ubicaciones.findById(idubic,(err,ubicacion) =>{
     if(err) return res.status(500).send({msg:"Error al realizar la peticion"})
     if(!ubicacion) return res.status(404).send({msg:"Ubicacion no existe"});
 
@@ -39,8 +40,19 @@ function deleteUbicacion(req,res){
   })
 }
 
+function updateUbicacion(req,res){
+  let idubic = req.body.idubic;
+  let entityUpdate = req.body.ubicacion;
+  ubicaciones.findByIdAndUpdate(idubic,entityUpdate,(err,ubicacionUpdate) =>{
+    if(err) return res.status(500).send({msg:"Error al realizar la peticion"});
+    res.status(200).send({msg:"Ubicacion Actualizada"});
+  })
+
+}
+
 module.exports = {
   PostUbicacion,
   getUbicaciones,
-  deleteUbicacion
+  deleteUbicacion,
+  updateUbicacion
 }

@@ -2,8 +2,7 @@ var marker;
 var map;
 var infoWindow;
 $(document).ready(function(){
-      map = initMap();
-      infoWindow = new google.maps.InfoWindow();
+      initMap();
       getUbicaciones();
 
 });
@@ -15,21 +14,22 @@ function initMap() {
     center: {lat:-34.960159, lng:-54.942453},
     zoom: 14
   });
-  /*google.maps.event.addListener(map, 'click', function(event) {
+  google.maps.event.addListener(map, 'click', function(event) {
 
       mouseLocation = event.latLng;
       placeMarker(mouseLocation,map);
-});*/
+});
 return map;
 }
 
-/*function placeMarker(location, map){
+function placeMarker(location, map){
   if(marker){
     marker.setPosition(location);
   }else{
       marker = new google.maps.Marker({
       position : location,
       map: map,
+      draggable : true
 
     });
   }
@@ -44,7 +44,7 @@ return map;
     $('#txtLon').val(lon);
   });
 }
-*/
+
 
 function getUbicaciones()
 {
@@ -52,8 +52,6 @@ function getUbicaciones()
      type: "GET",
      url: "http://localhost:8060/api/ubicacion",
      success: function(data){
-
-       marker = null;
         var ubicaciones = data.ubicaciones;
 
         var tblBody = document.getElementById("tblBody");
@@ -61,10 +59,7 @@ function getUbicaciones()
         for(var i = 0; i<ubicaciones.length; i++)
         {
 
-          $("#tblBody").append('<tr onclick = "CenterMap("'+ ubicaciones[i].latitud +'","'+ubicaciones[i].longitud+'")><td>'+ ubicaciones[i].nombre +'</td><td>'+ ubicaciones[i].descripcion +'</td><td>'+ ubicaciones[i].tipo +'</td><td><button type="button" class="btn btn-default btn-lg" onclick = EditarUbicacion("'+ubicaciones[i]._id+'","'+ubicaciones[i].latitud+'","'+ubicaciones[i].longitud'")><span class="glyphicon glyphicon-pencil"></span></button>
-<button type="button" class="btn btn-default btn-lg" onclick = "BorrarUbicacion("'+ubicaciones[i]._id+'","'+ubicaciones[i].latitud+'","'+ubicaciones[i].longitud+'")"'><span class="glyphicon glyphicon-remove"></span></button></td></tr>');
-
-
+          tblBody.innerHTML += "<tr class='yeaboi' id="+i+" hidden><td>"+ubicaciones[i].nombre+"</td><td>"+ubicaciones[i].descripcion+"</td><td>"+ubicaciones[i].tipo+"</td><td>"+ubicaciones[i].latitud+"</td><td>"+ubicaciones[i].longitud+"</td><td><input type='button' value='ActualizameAmeo' onclick='ActualizarUbicacion(\""+ubicaciones[i]._id+"\")'/><input type='button'value='BorramePerro' onclick='BorrarUbicacion(\""+ubicaciones[i]._id+"\")'></input></td></tr>";
 
 
 
@@ -74,7 +69,9 @@ function getUbicaciones()
               lng: parseFloat(ubicaciones[i].longitud)
             },
             map : map,
-            draggable:false,
+            draggable:true,
+            ubicacion : ubicaciones[i],
+            lugar : i,
             contenido : '<div id="content">'+
             '<div id="siteNotice">'+
             '</div>'+
@@ -84,6 +81,7 @@ function getUbicaciones()
             '</div>'+
             '</div>'
           });
+          ActualizarPosicion(marcador);
           bindInfoWindow(marcador,map,infoWindow,marcador.contenido);
         }
 
@@ -97,20 +95,50 @@ function getUbicaciones()
 }
 
 
-function BorrarUbicacion(latitud,longitud,idubic){
+function BorrarUbicacion(idubic){
   var id = {idubic:idubic}
   $.ajax({
   type:"DELETE",
-  data:JSON.stringify(idubic),
+  data:JSON.stringify(id),
   contentType:'application/json',
-  url:"http://localhost:2018/api/wsDeleteUbicacion",
+  url:"http://localhost:8060/api/wsDeleteUbicacion",
   success:function(data){
     alert("todo bien");
+    getUbicaciones();
   },
   error:function(data){
 alert("todo mal");
   }
 })
+initMap();
+}
+
+function ActualizarUbicacion(idubic){
+  var ubicacion = {
+    nombre : $("#txtNombre").val(),
+    descripcion : $("#txtDescripcion").val(),
+    tipo : $("#txtTipo").val(),
+    latitud : $("#txtLat").val(),
+    longitud : $("#txtLon").val(),
+  }
+  var ubic = {
+    ubicacion : ubicacion,
+    idubic : idubic
+  }
+  $.ajax({
+  type:"PUT",
+  data:JSON.stringify(ubic),
+  contentType:'application/json',
+  url:"http://localhost:8060/api/wsUpdateUbicacion",
+  success:function(data){
+    alert("todo bien");
+    getUbicaciones();
+  },
+  error:function(data){
+alert("todo mal");
+  }
+})
+initMap();
 }
 
 
@@ -128,4 +156,15 @@ function CenterMap(lat,lon){
   })
   //$("#txtLat").val(lat);
   //$("#txtLon").val(lon);
+}
+
+function ActualizarPosicion(marker){
+  google.maps.event.addListener(marker,'dragend',function(){
+    $(".yeaboi").hide();
+    $("#"+this.lugar).show();
+    var lat = marker.getPosition().lat();
+    var lon = marker.getPosition().lng();
+    $('#txtLat').val(lat);
+    $('#txtLon').val(lon);
+});
 }
