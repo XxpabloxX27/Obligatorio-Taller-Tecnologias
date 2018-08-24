@@ -29,6 +29,8 @@ function getUbicaciones(req,res)
 
 function getUbicacion(req,res)
 {
+  console.log(req.body);
+  console.log(req.body.id);
   let id = req.body.id;
   ubicaciones.findById(id,(err,ubicacion) => {
     if(err) return res.status(500).send({msg:"Error al realziar la petición"});
