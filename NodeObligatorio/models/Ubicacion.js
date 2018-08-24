@@ -6,6 +6,7 @@ const Ubicacion = Schema({
   descripcion : String,
   tipo: String,
   latitud : String,
-  longitud : String
+  longitud : String,
+  aprobado : Boolean
 });
 module.exports = mongoose.model("Ubicaciones",Ubicacion);

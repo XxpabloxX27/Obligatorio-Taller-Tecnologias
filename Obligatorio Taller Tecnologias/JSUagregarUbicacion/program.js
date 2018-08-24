@@ -34,7 +34,7 @@ function AgregarUbicacion(){
   var tipo = $("#txtTipo").val();
   var lat = $("#txtLat").val();
   var lon = $("#txtLon").val();
-  var aprob = true;
+  var aprob = false;
   var ubicacion ={
     nombre : nombre,
     descripcion : descrip,
@@ -126,13 +126,11 @@ function getUbicaciones()
        marker = null;
         var ubicaciones = data.ubicaciones;
 
-        var tblBody = document.getElementById("tblBody");
-        tblBody.innerHTML = "";
+      //  var tblBody = document.getElementById("tblBody");
+        //tblBody.innerHTML = "";
         for(var i = 0; i<ubicaciones.length; i++)
         {
-          if(ubicaciones[i].aprobado == true)
-          {
-          tblBody.innerHTML+="<tr onclick = 'CenterMap("+ ubicaciones[i].latitud +","+ubicaciones[i].longitud+")'><td>"+ ubicaciones[i].nombre +"</td><td>"+ ubicaciones[i].descripcion +"</td><td>"+ ubicaciones[i].tipo +"</td></tr>";
+          //tblBody.innerHTML+="<tr onclick = 'CenterMap("+ ubicaciones[i].latitud +","+ubicaciones[i].longitud+")'><td>"+ ubicaciones[i].nombre +"</td><td>"+ ubicaciones[i].descripcion +"</td><td>"+ ubicaciones[i].tipo +"</td></tr>";
           var marcador = new google.maps.Marker({
             position :{
               lat: parseFloat(ubicaciones[i].latitud),
@@ -150,7 +148,6 @@ function getUbicaciones()
             '</div>'
           });
           bindInfoWindow(marcador,map,infoWindow,marcador.contenido);
-        }
         }
 
 
