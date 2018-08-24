@@ -4,11 +4,9 @@
 
   <title>Punta Maps</title>
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <link rel="stylesheet" href="CSS/style.css" type="text/css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF3HhfN9p42Ol2BCDFLiqKkDKxvW4HpV4"></script>
-  <script type="text/javascript" src="JS/program.js"></script>
+  <script type="text/javascript" src="JSaltaTipo/program.js"></script>
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
 
@@ -23,12 +21,12 @@
       </div>
       <ul class="nav navbar-nav">
         <li><a href="home.html">Home</a></li>
-        <li class="active"><a href="index.html">Agregar</a></li>
+        <li><a href="index.html">Agregar</a></li>
         <li><a href="borrar.html">Editar</a></li>
         <li><a href="aprobarAdmin.html">Pendientes</a></li>
         <li><a href="alta.html">Usuarios</a></li>
         <li><a href="altaAdmin.html">Administradores</a></li>
-        <li><a href="altaTipo.html">Tipos de Ubicacion</a><li>
+        <li class="active"><a href="altaTipo.html">Tipos de Ubicacion</a><li>
       </ul>
     </div>
   </nav>
@@ -39,7 +37,7 @@
       <div class="form-area">
         <form role="form">
           <br style="clear:both">
-          <h3 style="margin-bottom: 25px; ">Agregar Ubicacion</h3>
+          <h3 style="margin-bottom: 25px; ">Agregar Tipo</h3>
 
 
 
@@ -51,19 +49,8 @@
             <textarea class="form-control" type="textarea" id="txtDescripcion" placeholder="Descripcion" maxlength="250" rows="7"></textarea>
             <span class="help-block"><p id="characterLeft" class="help-block ">No hay mas caracteres disponibles</p></span>
           </div>
-          <div class="form-group">
-            <select id="slt">
-
-            </select>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="txtLat" placeholder="Latitud"  readonly>
-          </div>
-          <div class="form-group">
-            <input type="text" class="form-control" id="txtLon" placeholder="Longitud" readonly >
-          </div>
           <hr>
-          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarUbicacion()">Agregar Ubicacion</button>
+          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarTipo()">Agregar Tipo</button>
         </form>
       </div>
     </div>
@@ -74,7 +61,6 @@
           <tr>
             <th>Nombre</th>
             <th>Descripcion</th>
-            <th>Tipo</th>
           </tr>
         </thead>
         <tbody id="tblBody">

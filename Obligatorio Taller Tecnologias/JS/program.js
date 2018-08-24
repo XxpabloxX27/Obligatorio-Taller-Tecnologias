@@ -25,40 +25,65 @@ $(document).ready(function(){
 
     });
     getUbicaciones();
+    getTipos();
 
 });
 
 function AgregarUbicacion(){
-  var nombre = $("#txtNombre").val();
-  var descrip = $("#txtDescripcion").val();
-  var tipo = $("#txtTipo").val();
-  var lat = $("#txtLat").val();
-  var lon = $("#txtLon").val();
-  var aprob = true;
-  var ubicacion ={
-    nombre : nombre,
-    descripcion : descrip,
-    tipo : tipo,
-    latitud : lat,
-    longitud : lon,
-    aprobado : aprob
-  }
 
-$.ajax({
-  type:"POST",
-  dataType: "json",
-  data: JSON.stringify(ubicacion),
-  contentType: 'application/json',
-  url:"http://localhost:8060/api/wsAgregarUbicacion",
-  success:function(data){
-    alert("bien");
-    marker = null;
-    getUbicaciones();
-  },
-  error:function(data){
-    alert("todo mal");
-  }
-});
+  var e = document.getElementById("slt");
+  var selectId = e.options[e.selectedIndex].value;
+
+
+  $.ajax({
+     type: "GET",
+     url: "http://localhost:8060/api/wsTipos",
+     success: function(data){
+       var tipo;
+        var tipos = data.tipos;
+        for(var i = 0; i<tipos.length; i++)
+        {
+          if(tipos[i]._id == selectId){
+            tipo = tipos[i];
+          }
+        }
+        var nombre = $("#txtNombre").val();
+        var descrip = $("#txtDescripcion").val();
+        var lat = $("#txtLat").val();
+        var lon = $("#txtLon").val();
+        var aprob = true;
+        var ubicacion ={
+          nombre : nombre,
+          descripcion : descrip,
+          tipo : tipo,
+          latitud : lat,
+          longitud : lon,
+          aprobado : aprob
+        }
+
+      $.ajax({
+        type:"POST",
+        dataType: "json",
+        data: JSON.stringify(ubicacion),
+        contentType: 'application/json',
+        url:"http://localhost:8060/api/wsAgregarUbicacion",
+        success:function(data){
+          alert("bien");
+          marker = null;
+          getUbicaciones();
+        },
+        error:function(data){
+          alert("todo mal");
+        }
+      });
+
+
+     },
+     error: function(data)
+     {
+
+     }
+   })
 };
 
 
@@ -130,9 +155,11 @@ function getUbicaciones()
         tblBody.innerHTML = "";
         for(var i = 0; i<ubicaciones.length; i++)
         {
+          //tipo = ubicaciones[i].tipo.nombre;
           if(ubicaciones[i].aprobado == true)
           {
-          tblBody.innerHTML+="<tr onclick = 'CenterMap("+ ubicaciones[i].latitud +","+ubicaciones[i].longitud+")'><td>"+ ubicaciones[i].nombre +"</td><td>"+ ubicaciones[i].descripcion +"</td><td>"+ ubicaciones[i].tipo +"</td></tr>";
+
+          tblBody.innerHTML+="<tr onclick = 'CenterMap("+ ubicaciones[i].latitud +","+ubicaciones[i].longitud+")'><td>"+ ubicaciones[i].nombre +"</td><td>"+ ubicaciones[i].descripcion +"</td><td>"+ubicaciones[i].tipo.nombre+"</td></tr>";
           var marcador = new google.maps.Marker({
             position :{
               lat: parseFloat(ubicaciones[i].latitud),
@@ -178,4 +205,31 @@ function CenterMap(lat,lon){
   })
   $("#txtLat").val(lat);
   $("#txtLon").val(lon);
+}
+
+function getTipos()
+{
+  $.ajax({
+     type: "GET",
+     url: "http://localhost:8060/api/wsTipos",
+     success: function(data){
+       marker = null;
+        var tipos = data.tipos;
+
+        var tblBody = document.getElementById("slt");
+        tblBody.innerHTML = "";
+        for(var i = 0; i<tipos.length; i++)
+        {
+
+          tblBody.innerHTML+="<option value="+tipos[i]._id+">"+tipos[i].nombre+"</option>";
+
+        }
+
+
+     },
+     error: function(data)
+     {
+
+     }
+   })
 }
