@@ -4,6 +4,12 @@ var markers = [];
 var map;
 var infoWindow;
 $(document).ready(function(){
+  var tipo = sessionStorage.getItem("tipo");
+  if(tipo == "administrador"  || tipo == "null" ){
+    window.open("login.html",'_self');
+
+  }
+
       map = initMap();
       infoWindow = new google.maps.InfoWindow();
     $('#characterLeft').text('250 characters left');

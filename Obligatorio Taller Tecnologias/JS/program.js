@@ -26,6 +26,11 @@ $(document).ready(function(){
     });
     getUbicaciones();
     getTipos();
+    var tipo = sessionStorage.getItem("tipo");
+    if(tipo == "usuario"  || tipo == "null" ){
+      window.open("login.html",'_self');
+
+    }
 
 });
 
