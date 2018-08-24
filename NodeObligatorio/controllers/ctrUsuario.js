@@ -6,6 +6,7 @@ function postUsuario(req,res){
   usuario.apellido = req.body.apellido;
   usuario.mail = req.body.mail;
   usuario.contraseña = req.body.contraseña;
+  usuario.tipo = req.body.tipo;
   usuario.save((err,usuarioIngresado)=>{
     if(err){
       res.status(500).send({msg:"Error al guardar"});

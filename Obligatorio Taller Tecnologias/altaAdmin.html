@@ -7,10 +7,10 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCF3HhfN9p42Ol2BCDFLiqKkDKxvW4HpV4"></script>
-  <script type="text/javascript" src="JSalta/program.js"></script>
+  <script type="text/javascript" src="JSaltaAdmin/program.js"></script>
   <meta name="viewport" content="initial-scale=1.0">
   <meta charset="utf-8">
-  <link rel="stylesheet" href="CSSalta/style.css" type="text/css">
+  <link rel="stylesheet" href="CSSaltaAdmin/style.css" type="text/css">
 
 </head>
 <body>
@@ -26,8 +26,8 @@
         <li><a href="index.html">Agregar</a></li>
         <li><a href="borrar.html">Editar</a></li>
         <li><a href="aprobarAdmin.html">Pendientes</a></li>
-        <li class="active"><a href="alta.html">Usuarios</a></li>
-        <li><a href="altaAdmin.html">Administradores</a></li>
+        <li><a href="alta.html">Usuarios</a></li>
+        <li class="active"><a href="altaAdmin.html">Administradores</a></li>
       </ul>
     </div>
   </nav>
@@ -38,7 +38,7 @@
       <div class="form-area">
         <form role="form">
           <br style="clear:both">
-          <h2 style="margin-bottom: 25px; ">Registro De Usuario</h2>
+          <h2 style="margin-bottom: 25px; ">Registro De Administradores</h2>
 
           <br>
           <h3> Complete los siguientes campos:</h3>
@@ -65,7 +65,7 @@
 
             </select>-->
           <hr>
-          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarUsuario()">Registrar</button>
+          <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="AgregarAdmin()">Registrar</button>
         </form>
         <div id="usu" class="col-sm-4"></div>
         <div id="usuarios">

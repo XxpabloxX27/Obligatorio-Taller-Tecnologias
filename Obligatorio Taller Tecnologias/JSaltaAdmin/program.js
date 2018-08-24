@@ -6,7 +6,7 @@ $(document).ready(function(){
 });
 
 
-function AgregarUsuario(){
+function AgregarAdmin(){
     var nombre = $("#txtNombre").val();
     var apellido = $("#txtApellido").val();
     var mail = $("#txtMail").val();
@@ -16,7 +16,7 @@ function AgregarUsuario(){
       apellido:apellido,
       mail : mail,
       contraseña : contraseña,
-      tipo : "usuario"
+      tipo : "administrador"
 
     }
 
@@ -51,10 +51,11 @@ function AgregarUsuario(){
           tblBody.innerHTML = "";
           for(var i = 0; i<usuarios.length; i++)
           {
-            if(usuarios[i].tipo == "usuario"){
+            if(usuarios[i].tipo == "administrador"){
 
               tblBody.innerHTML+="<tr ><td>"+ usuarios[i].nombre +"</td><td>"+ usuarios[i].mail +"</td></tr>";
             }
+
 
           }
 

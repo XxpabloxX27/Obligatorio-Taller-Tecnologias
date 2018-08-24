@@ -4,6 +4,23 @@ var infoWindow;
 $(document).ready(function(){
       initMap();
       getUbicaciones();
+      infoWindow = new google.maps.InfoWindow();
+    $('#characterLeft').text('250 characters left');
+    $('#txtDescripcion').keydown(function () {
+        var max = 250;
+        var len = $(this).val().length;
+        if (len >= max) {
+            $('#characterLeft').text('No hay mas caracteres disponibles');
+            $('#characterLeft').addClass('red');
+            $('#btnAgregar').addClass('disabled');
+        }
+        else {
+            var ch = max - len;
+            $('#characterLeft').text(ch + ' caracteres disponibles');
+            $('#btnAgregar').removeClass('disabled');
+            $('#characterLeft').removeClass('red');
+        }
+            });
 
 });
 
@@ -56,7 +73,7 @@ function getUbicaciones()
         {
           if(ubicaciones[i].aprobado ==true)
           {
-            tblBody.innerHTML += "<tr class='yeaboi' id="+i+" hidden><td>"+ubicaciones[i].nombre+"</td><td>"+ubicaciones[i].descripcion+"</td><td>"+ubicaciones[i].tipo+"</td><td>"+ubicaciones[i].latitud+"</td><td>"+ubicaciones[i].longitud+"</td><td><input type='button' value='ActualizameAmeo' onclick='ActualizarUbicacion(\""+ubicaciones[i]._id+"\")'/><input type='button'value='BorramePerro' onclick='BorrarUbicacion(\""+ubicaciones[i]._id+"\")'></input></td></tr>";
+            tblBody.innerHTML += "<tr class='yeaboi' id="+i+" hidden><td>"+ubicaciones[i].nombre+"</td><td>"+ubicaciones[i].descripcion+"</td><td>"+ubicaciones[i].tipo+"</td><td>"+ubicaciones[i].latitud+"</td><td>"+ubicaciones[i].longitud+"</td><td><input type='button' value='Actualizar' onclick='ActualizarUbicacion(\""+ubicaciones[i]._id+"\")'/><input type='button'value='Borrar' onclick='BorrarUbicacion(\""+ubicaciones[i]._id+"\")'></input></td></tr>";
 
 
 

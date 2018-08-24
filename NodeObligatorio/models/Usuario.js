@@ -6,5 +6,6 @@ const Usuario = Schema({
   apellido : String,
   mail: String,
   contraseña : String,
+  tipo : String
 });
 module.exports = mongoose.model("Usuarios",Usuario);

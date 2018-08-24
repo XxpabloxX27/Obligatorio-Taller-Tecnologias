@@ -20,13 +20,10 @@
         <li><a href="home.html">Home</a></li>
         <li ><a href="index.html">Agregar</a></li>
         <li class="active"><a href="borrar.html">Editar</a></li>
+        <li><a href="aprobarAdmin.html">Pendientes</a></li>
+        <li><a href="alta.html">Usuarios</a></li>
+        <li><a href="altaAdmin.html">Administradores</a></li>
       </ul>
-      <form class="navbar-form navbar-left" action="/action_page.php">
-        <div class="form-group">
-          <input type="text" class="form-control" placeholder="Buscar" name="search"></input>
-        </div>
-        <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></button>
-      </form>
     </div>
   </nav>
 
@@ -36,7 +33,7 @@
         <div class="form-area">
           <form role="form">
             <br style="clear:both">
-            <h3 style="margin-bottom: 25px; ">Agregar Ubicacion</h3>
+            <h3 style="margin-bottom: 25px; ">Manejo de Ubicaciones</h3>
 
 
 
@@ -58,7 +55,6 @@
               <input type="text" class="form-control" id="txtLon" placeholder="Longitud" readonly >
             </div>
             <hr>
-            <button type="button" id="btnAgregar" class="btn btn-primary pull-right " onclick="ActualizarUbicacion()">esrtdhyjguhn</button>
           </form>
         </div>
       </div>
@@ -74,7 +70,7 @@
           <th>Tipo</th>
           <th>Lat</th>
           <th>Lng</th>
-          <th>Botones</th>
+          <th>Editar/Borrar</th>
         </tr>
       </thead>
       <tbody id="tblBody">
